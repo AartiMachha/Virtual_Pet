@@ -73,15 +73,14 @@ function readStock(data){
 function feedDog(){
   dog.addImage(happyDog);
 
-  var food_stock_val = getFoodStock();
+  var food_stock_val = foodObj.getFoodStock();
   if(food_stock_val <= 0){
     foodObj.updateFoodStock(food_stock_val *0);
   }
   else{
-    foodObj.updateFoodStock(food_stock_val *-1);
+    foodObj.updateFoodStock(food_stock_val -1);
   }
 
-  foodObj.updateFoodStock(foodObj.getFoodStock()-1);
   database.ref("/").update({
   Food: foodObj.getFoodStock(),
   FeedTime: hour()
@@ -93,6 +92,6 @@ function feedDog(){
 function addFoods(){
   foodS++;
   database.ref('/').update({
-    food:foodS
+    Food:foodS
   })
 }
